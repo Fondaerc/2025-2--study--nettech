@@ -1,0 +1,517 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  english,
+  russian,
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{setspace}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+\ifLuaTeX
+\usepackage[bidi=basic,provide=*]{babel}
+\else
+\usepackage[bidi=default,provide=*]{babel}
+\fi
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+\usepackage[backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+
+\usepackage[]{csquotes}
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \IfPackageAtLeastTF{plex-otf.sty}{2024-12-06}{
+    \usepackage[math,RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},DefaultFeatures={Ligatures=Common}]{plex-otf}
+  }{
+    \usepackage[RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},DefaultFeatures={Ligatures=Common}]{plex-otf}
+  }
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\\usepackage{indentfirst}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Отчёт о лабораторной работе},
+  pdfauthor={Бабаев Рахим},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Отчёт о лабораторной работе}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Лабораторная работа №5. Простые сети в GNS3. Анализ трафика}
+\author{Бабаев Рахим}
+\date{}
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Целью лабораторной работы является построение простейших сетей в GNS3 на
+базе коммутатора, а также маршрутизаторов FRR и VyOS, и анализ сетевого
+трафика с помощью Wireshark.
+
+\chapter{Задание}\label{ux437ux430ux434ux430ux43dux438ux435}
+
+В ходе лабораторной работы требовалось выполнить следующие задания:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Построить в GNS3 простейшую сеть на базе коммутатора Ethernet и двух
+  оконечных устройств VPCS.
+\item
+  Назначить оконечным устройствам IP-адреса из сети 192.168.1.0/24 и
+  проверить связь между узлами.
+\item
+  Запустить захват трафика и проанализировать ARP-, ICMP-, UDP- и
+  TCP-сообщения в Wireshark.
+\item
+  Построить простейшую сеть на базе маршрутизатора FRR, коммутатора и
+  оконечного устройства, выполнить настройку IP-адресации и проверить
+  доступность маршрутизатора.
+\item
+  Построить простейшую сеть на базе маршрутизатора VyOS, выполнить его
+  первоначальную настройку, назначить IP-адрес интерфейсу и проверить
+  связь с оконечным устройством.
+\end{enumerate}
+
+\chapter{Теоретическое
+введение}\label{ux442ux435ux43eux440ux435ux442ux438ux447ux435ux441ux43aux43eux435-ux432ux432ux435ux434ux435ux43dux438ux435}
+
+GNS3 представляет собой платформу для моделирования и эмуляции сетей,
+которая позволяет собирать виртуальные топологии из маршрутизаторов,
+коммутаторов и оконечных узлов. Такой подход позволяет проверять работу
+протоколов и взаимодействие устройств без использования физического
+сетевого оборудования.
+
+В данной лабораторной работе используются VPCS, Ethernet-коммутатор,
+маршрутизаторы FRR и VyOS. VPCS применяется как лёгкое виртуальное
+конечное устройство, на котором можно задавать IP-адрес, шлюз и
+выполнять базовые сетевые команды. Коммутатор Ethernet обеспечивает
+обмен кадрами в пределах локальной сети, а маршрутизаторы FRR и VyOS
+используются для практической настройки интерфейсов и проверки сетевой
+связности.
+
+Для анализа сетевого взаимодействия используется Wireshark. С его
+помощью можно захватывать трафик на выбранном соединении и анализировать
+содержимое кадров и пакетов разных протоколов. В лабораторной работе
+особое внимание уделяется ARP, ICMP, а также вариантам эхо-запросов в
+режимах UDP и TCP.
+
+Протокол ARP используется для определения MAC-адреса по известному
+IPv4-адресу в пределах локального сегмента сети. Протокол ICMP
+применяется для диагностических сообщений, в том числе для команды ping.
+Анализ этих протоколов позволяет проследить, как на практике происходит
+разрешение адресов, формирование эхо-запросов и ответов, а также
+передача кадров между узлами через коммутатор и маршрутизатор.
+
+FRR является программным маршрутизатором с интерфейсом командной строки,
+близким по логике к оборудованию Cisco. VyOS также является программным
+маршрутизатором, но использует собственную систему конфигурирования с
+разделением на рабочий режим и режим настройки. Практическая работа с
+обоими типами маршрутизаторов позволяет сравнить подходы к
+конфигурированию сетевых устройств.
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{1. Моделирование простейшей сети на базе
+коммутатора}\label{ux43cux43eux434ux435ux43bux438ux440ux43eux432ux430ux43dux438ux435-ux43fux440ux43eux441ux442ux435ux439ux448ux435ux439-ux441ux435ux442ux438-ux43dux430-ux431ux430ux437ux435-ux43aux43eux43cux43cux443ux442ux430ux442ux43eux440ux430}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Сначала были запущены GNS3 VM и клиент GNS3, после чего был создан
+  новый проект. Это позволило подготовить рабочую область для сборки
+  топологии и дальнейшей проверки сетевого взаимодействия.
+\item
+  В рабочее пространство были добавлены коммутатор Ethernet и два узла
+  VPCS. После этого устройствам были заданы осмысленные имена по шаблону
+  из методических указаний, а сами узлы были соединены с коммутатором,
+  чтобы получить простейшую локальную сеть. fileciteturn14file0
+\item
+  Затем была выполнена настройка IP-адресации для первого узла VPCS. Для
+  PC-1 был задан адрес 192.168.1.11/24 и шлюз 192.168.1.1, после чего
+  конфигурация была сохранена командой \texttt{save}.
+  fileciteturn14file0
+\item
+  Аналогичным образом был настроен второй узел VPCS. Для PC-2 был задан
+  адрес 192.168.1.12/24 в той же сети, что обеспечило возможность
+  прямого обмена пакетами через коммутатор без необходимости
+  маршрутизации. fileciteturn14file0
+\item
+  После назначения адресов была выполнена проверка связности. С помощью
+  команды \texttt{ping} с одного узла был отправлен эхо-запрос на
+  IP-адрес второго узла, и успешное получение ответа показало, что
+  коммутация в локальном сегменте работает корректно.
+  fileciteturn14file0
+\item
+  После завершения проверки работы сети все узлы проекта были
+  остановлены. Это позволило завершить первый этап лабораторной работы и
+  перейти к анализу трафика.
+\end{enumerate}
+
+\section{2. Анализ трафика в GNS3 посредством
+Wireshark}\label{ux430ux43dux430ux43bux438ux437-ux442ux440ux430ux444ux438ux43aux430-ux432-gns3-ux43fux43eux441ux440ux435ux434ux441ux442ux432ux43eux43c-wireshark}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Для анализа сетевого взаимодействия на соединении между PC-1 и
+  коммутатором был запущен захват трафика. После выбора команды
+  \texttt{Start\ capture} автоматически открылся Wireshark, а в
+  топологии GNS3 на соответствующем соединении появился индикатор
+  активного захвата. fileciteturn14file0
+\item
+  Затем в проекте были запущены все узлы. Сразу после старта в окне
+  Wireshark появились кадры ARP, что связано с попытками устройств
+  определить MAC-адреса по известным IP-адресам внутри локальной сети.
+  fileciteturn14file0
+\item
+  При анализе ARP-трафика было установлено, что сначала формируется
+  широковещательный ARP Request с вопросом о том, какому MAC-адресу
+  соответствует определённый IPv4-адрес. В ответ узел с искомым адресом
+  отправляет ARP Reply, после чего инициатор получает нужное
+  соответствие IP-MAC и может передавать обычные IP-пакеты.
+\item
+  Далее в терминале PC-2 была просмотрена справка по команде
+  \texttt{ping}, после чего был отправлен один эхо-запрос в ICMP-режиме
+  на PC-1. В Wireshark были зафиксированы ICMP Echo Request и Echo
+  Reply, что подтвердило корректную передачу диагностических сообщений в
+  пределах локальной сети. fileciteturn14file0
+\item
+  После этого был выполнен один эхо-запрос в UDP-режиме. Анализ
+  захваченного трафика показал, что в этом режиме пакет уже не является
+  классическим ICMP-эхо, а передаётся как UDP-датаграмма, что позволяет
+  проследить различие между типами диагностических сообщений и
+  транспортных протоколов. fileciteturn14file0
+\item
+  Затем был выполнен один эхо-запрос в TCP-режиме. В Wireshark можно
+  было увидеть TCP-сегменты, а также особенности установления
+  соединения, характерные для данного протокола, включая обмен
+  служебными флагами. fileciteturn14file0
+\item
+  На завершающем этапе захват трафика был остановлен. Полученные данные
+  показали, что Wireshark позволяет на практике увидеть
+  последовательность ARP-разрешения адресов и различия между ICMP-, UDP-
+  и TCP-обменом.
+\end{enumerate}
+
+\section{3. Моделирование простейшей сети на базе маршрутизатора
+FRR}\label{ux43cux43eux434ux435ux43bux438ux440ux43eux432ux430ux43dux438ux435-ux43fux440ux43eux441ux442ux435ux439ux448ux435ux439-ux441ux435ux442ux438-ux43dux430-ux431ux430ux437ux435-ux43cux430ux440ux448ux440ux443ux442ux438ux437ux430ux442ux43eux440ux430-frr}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Для следующего этапа был создан новый проект в GNS3. В рабочее
+  пространство были добавлены узел VPCS, коммутатор Ethernet и
+  маршрутизатор FRR, после чего элементы были соединены в единую
+  топологию. fileciteturn14file0
+\item
+  После размещения устройств им были назначены понятные имена в
+  соответствии с методическими указаниями. Такой подход позволяет легче
+  ориентироваться в топологии и отличать коммутатор, маршрутизатор и
+  оконечный узел при дальнейшем анализе.
+\item
+  Далее на соединении между коммутатором и маршрутизатором был включён
+  захват трафика. Это было необходимо для последующего анализа кадров и
+  пакетов, проходящих между оконечным устройством и маршрутизатором FRR.
+  fileciteturn14file0
+\item
+  После запуска всех устройств была открыта консоль каждого узла. На PC1
+  был настроен IP-адрес 192.168.1.10/24 с указанием шлюза 192.168.1.1,
+  затем конфигурация была сохранена и проверена командой
+  \texttt{show\ ip}. fileciteturn14file0
+\item
+  Затем была выполнена настройка самого маршрутизатора FRR. Сначала ему
+  было присвоено имя узла, затем на интерфейсе \texttt{eth0} был
+  назначен адрес 192.168.1.1/24 и интерфейс был переведён в рабочее
+  состояние командой \texttt{no\ shutdown}. После этого конфигурация
+  была записана в память командой \texttt{write\ memory}.
+  fileciteturn14file0
+\item
+  После завершения базовой настройки была выполнена проверка
+  конфигурации маршрутизатора. Команды \texttt{show\ running-config} и
+  \texttt{show\ interface\ brief} позволили убедиться, что интерфейс
+  имеет правильный IP-адрес и находится в активном состоянии.
+  fileciteturn14file0
+\item
+  Далее была выполнена проверка связности между оконечным устройством и
+  маршрутизатором. Узел PC1 успешно отправлял эхо-запросы на адрес
+  192.168.1.1, что означало корректную настройку локальной сети и
+  работоспособность FRR как маршрутизатора в данной топологии.
+  fileciteturn14file0
+\item
+  В Wireshark был проанализирован трафик, проходящий между коммутатором
+  и маршрутизатором. В захваченном трафике были видны ARP-кадры для
+  разрешения MAC-адресов и ICMP-сообщения, возникающие при проверке
+  доступности маршрутизатора с узла PC1. fileciteturn14file0
+\item
+  После завершения анализа захват был остановлен, а все узлы в проекте
+  были выключены. Это завершило этап работы с маршрутизатором FRR.
+\end{enumerate}
+
+\section{4. Моделирование простейшей сети на базе маршрутизатора
+VyOS}\label{ux43cux43eux434ux435ux43bux438ux440ux43eux432ux430ux43dux438ux435-ux43fux440ux43eux441ux442ux435ux439ux448ux435ux439-ux441ux435ux442ux438-ux43dux430-ux431ux430ux437ux435-ux43cux430ux440ux448ux440ux443ux442ux438ux437ux430ux442ux43eux440ux430-vyos}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Для последнего этапа лабораторной работы был создан отдельный проект,
+  в который были добавлены VPCS, Ethernet-коммутатор и маршрутизатор
+  VyOS. После размещения устройства были соединены, а их названия
+  изменены по тому же принципу, что и в предыдущем задании.
+  fileciteturn14file0
+\item
+  Затем на соединении между коммутатором и маршрутизатором был включён
+  захват трафика. Это позволило подготовить топологию к анализу сетевого
+  взаимодействия после настройки VyOS. fileciteturn14file0
+\item
+  После запуска всех устройств была выполнена настройка оконечного узла
+  PC1. Ему был назначен IP-адрес 192.168.1.10/24 и шлюз 192.168.1.1,
+  после чего конфигурация была сохранена и проверена.
+  fileciteturn14file0
+\item
+  Далее была выполнена первоначальная настройка маршрутизатора VyOS.
+  После загрузки был выполнен вход под учётной записью \texttt{vyos},
+  при необходимости система была установлена на диск с помощью команды
+  \texttt{install\ image}, а после завершения установки маршрутизатор
+  был перезагружен. fileciteturn14file0
+\item
+  После перезагрузки был выполнен переход в режим конфигурирования
+  командой \texttt{configure}. Затем маршрутизатору было присвоено имя
+  узла, а интерфейсу \texttt{eth0} был назначен IP-адрес 192.168.1.1/24.
+  fileciteturn14file0
+\item
+  Перед применением параметров была просмотрена разница конфигурации
+  командой \texttt{compare}. После этого настройки были зафиксированы
+  командой \texttt{commit} и сохранены командой \texttt{save}, что
+  обеспечило их сохранение после возможной перезагрузки устройства.
+  fileciteturn14file0
+\item
+  Далее была просмотрена информация об интерфейсах маршрутизатора
+  командой \texttt{show\ interfaces}. Это позволило убедиться, что
+  интерфейс \texttt{eth0} настроен правильно и доступен для обмена
+  трафиком с узлом PC1. fileciteturn14file0
+\item
+  После завершения настройки была выполнена проверка подключений. Узел
+  PC1 успешно отправлял эхо-запросы на адрес 192.168.1.1, что
+  подтвердило корректную настройку сети и работоспособность
+  маршрутизатора VyOS в собранной топологии. fileciteturn14file0
+\item
+  В окне Wireshark был проанализирован захваченный трафик. Как и в
+  случае с FRR, в нём присутствовали ARP-кадры, обеспечивающие
+  разрешение адресов, и ICMP-сообщения, отражающие процесс проверки
+  доступности маршрутизатора. fileciteturn14file0
+\item
+  После завершения анализа захват был остановлен, все устройства были
+  выключены, а работа с GNS3 завершена. Это означало полное выполнение
+  всех заданий лабораторной работы.
+\end{enumerate}
+
+\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+
+В ходе лабораторной работы были построены и исследованы несколько
+простых сетевых топологий в GNS3. Были рассмотрены варианты сети на базе
+коммутатора Ethernet, а также сети с использованием маршрутизаторов FRR
+и VyOS.
+
+Практическая часть показала, что даже простая локальная сеть включает
+несколько уровней взаимодействия. До начала обмена IP-пакетами узлы
+должны выполнить ARP-разрешение адресов, а уже затем становится
+возможной передача ICMP-, UDP- и TCP-трафика. Анализ Wireshark позволил
+наглядно проследить эту последовательность.
+
+Отдельно была отработана базовая настройка программных маршрутизаторов
+FRR и VyOS. Несмотря на различие в системах команд, оба маршрутизатора
+позволяют назначать IP-адреса интерфейсам, сохранять конфигурацию и
+обеспечивать сетевую связность между оконечным устройством и шлюзом.
+
+Таким образом, лабораторная работа позволила закрепить практические
+навыки построения простейших сетей в GNS3, захвата и анализа трафика в
+Wireshark, а также базовой настройки программных маршрутизаторов в
+виртуальной среде.
+
+\chapter{Список
+литературы}\label{ux441ux43fux438ux441ux43eux43a-ux43bux438ux442ux435ux440ux430ux442ux443ux440ux44b}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Королькова А. В., Кулябов Д. С. Сетевые технологии. Лабораторный
+  практикум.
+\item
+  Документация Wireshark.
+\item
+  Документация GNS3.
+\item
+  Документация FRRouting.
+\item
+  Документация VyOS.
+\end{enumerate}
+
+
+\printbibliography
+
+
+
+\end{document}
